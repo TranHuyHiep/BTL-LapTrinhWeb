@@ -112,7 +112,7 @@ function btnDeleteAll(check) {
         success: function (res) {
             if (res.status) {
                 if (check == true) {
-                    $('#noiDung').html("Xóa thành công!");
+                    $('#noiDung').html("Successfully deleted!");
                     $('#success_tic').modal('show');
                 }
 
@@ -152,7 +152,7 @@ function btnCheckout() {
                         orderViewModel: JSON.stringify(hoaDonBan)
                     },
                     success: function (res) {
-                        $('#noiDung').html("Đơn hàng đã được ghi lại");
+                        $('#noiDung').html("Order has been recorded");
                         $('#success_tic').modal('show');
                         btnDeleteAll(false);
                     }
@@ -198,7 +198,7 @@ function confirmCheckout() {
         },
         success: function (res) {
             if (res.status) {
-                $('#noiDung').html("Đơn hàng đã được ghi lại");
+                $('#noiDung').html("Order has been recorded");
                 $('#success_tic').modal('show');
                 btnDeleteAll(false);
             } else {
