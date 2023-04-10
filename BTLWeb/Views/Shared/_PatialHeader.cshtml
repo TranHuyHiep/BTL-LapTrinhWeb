@@ -11,12 +11,11 @@
         </div>
         <div class="col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
-                <button type="button" class="btn btn-sm btn-light" asp-area="admin" asp-controller="homeadmin">Admin</button>
+                <a class="btn btn-sm btn-light" asp-area="admin" asp-controller="homeadmin" asp-action="index">Admin</a>
                 <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">Sign in</button>
-                        <button class="dropdown-item" type="button">Sign up</button>
+                        <a class="dropdown-item" asp-controller="Access" asp-action="Logout">Logout</a>
                     </div>
                 </div>
                 <div class="btn-group mx-2">

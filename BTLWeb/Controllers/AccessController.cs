@@ -28,10 +28,16 @@ namespace BTLWeb.Controllers
                 var data = db.TUsers.Where(s => s.Username.Equals(user.Username) && s.Password.Equals(user.Password)).FirstOrDefault();
                 if (data != null)
                 {
-                    //add session
-
                     HttpContext.Session.SetString("Username", data.Username.ToString());
-                    return RedirectToAction("Index", "Home");
+                    //add session
+                    if (data.LoaiUser == 0)
+                    {
+                        return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
@@ -57,6 +63,7 @@ namespace BTLWeb.Controllers
                 var check = db.TUsers.FirstOrDefault(s => s.Username == user.Username);
                 if (check == null)
                 {
+                    user.LoaiUser = 1;
                     db.TUsers.Add(user);
                     db.SaveChanges();
                     return RedirectToAction("Login", "Access");

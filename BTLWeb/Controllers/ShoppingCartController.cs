@@ -178,7 +178,7 @@ namespace BTLWeb.Controllers
                 _khachHang.Username = HttpContext.Session.GetString("Username");
                 _khachHang.MaKhanhHang = HttpContext.Session.GetString("Username");
                 db.TKhachHangs.Add(_khachHang);
-                db.SaveChanges
+                db.SaveChanges();
             }
 
             var order = new JavaScriptSerializer().Deserialize<OrderViewModel>(orderViewModel);
