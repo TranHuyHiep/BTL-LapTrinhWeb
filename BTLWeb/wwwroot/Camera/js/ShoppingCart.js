@@ -75,11 +75,11 @@ function loadData() {
                     type: 'POST',
                     dataType: 'json',
                     success: function (res) {
+                        updateSumMoney()
                     }
                 })
-                updateSumMoney()
             });
-            updateSumMoney() 
+            updateSumMoney()
 
         }
     })
@@ -104,15 +104,18 @@ function updateSumMoney() {
 
 loadData();
 
-function btnDeleteAll() {
+function btnDeleteAll(check) {
     $.ajax({
         url: 'https://localhost:44368/shoppingcart/DeleteAll',
         type: 'POST',
         dataType: 'json',
         success: function (res) {
             if (res.status) {
-                $('#noiDung').html("Xóa thành công!");
-                $('#success_tic').modal('show');
+                if (check == true) {
+                    $('#noiDung').html("Xóa thành công!");
+                    $('#success_tic').modal('show');
+                }
+
             } else {
                 alert('Bạn không có sản phẩm nào để xóa!')
             }
@@ -126,16 +129,63 @@ function btnContinue() {
 }
 
 function btnCheckout() {
+    $.ajax({
+        url: 'https://localhost:44368/shoppingcart/checkkhachhang',
+        type: 'Get',
+        success: function (res) {
+            if (res.status) {
+                var tongtien = $('#sumAllMoney').text();
+                var note = $('#note').val()
 
+                var hoaDonBan = {
+                    TongTienHD: tongtien,
+                    PhuongThucThanhToan: 0,
+                    GhiChu: note,
+                    TrangThai: 0,
+                }
+
+                $.ajax({
+                    url: 'https://localhost:44368/shoppingcart/CreateOrderNoCreateKhachHang',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        orderViewModel: JSON.stringify(hoaDonBan)
+                    },
+                    success: function (res) {
+                        $('#noiDung').html("Đơn hàng đã được ghi lại");
+                        $('#success_tic').modal('show');
+                        btnDeleteAll(false);
+                    }
+                })
+            } else {
+                $('.bd-example-modal-lg').modal('show');
+            }
+        }
+    })
 }
 
 function confirmCheckout() {
+    var tongtien = $('#sumAllMoney').text();
+    var note = $('#note').val()
+
     var hoaDonBan = {
-        TongTienHD: 111,
+        TongTienHD: tongtien,
         PhuongThucThanhToan: 0,
-        GhiChu: 'cc',
+        GhiChu: note,
         TrangThai: 0,
-        MaKhachHang: 'N01'
+    }
+
+    var yourname = $('#yourname').val()
+    var birthDay = $('#birthDay').val()
+    var phone = $('#phone').val()
+    var address = $('#address').val()
+
+
+    var _khachhang = {
+        TenKhachHang: yourname,
+        NgaySinh: new Date(birthDay.split("/").reverse().join("-")),
+        SoDienThoai: phone,
+        DiaChi: address
     }
 
     $.ajax({
@@ -143,13 +193,14 @@ function confirmCheckout() {
         type: 'POST',
         dataType: 'json',
         data: {
-            orderViewModel: JSON.stringify(hoaDonBan)
+            orderViewModel: JSON.stringify(hoaDonBan),
+            khachHang: JSON.stringify(_khachhang),
         },
         success: function (res) {
             if (res.status) {
                 $('#noiDung').html("Đơn hàng đã được ghi lại");
                 $('#success_tic').modal('show');
-                btnDeleteAll();
+                btnDeleteAll(false);
             } else {
                 alert("Bạn chưa có sản phẩm nào trong giỏ hàng!")
             }

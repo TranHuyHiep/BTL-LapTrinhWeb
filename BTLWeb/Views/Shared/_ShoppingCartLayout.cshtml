@@ -13,7 +13,7 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../Camera/css/style.css" rel="stylesheet">
-    <link href="../Camera/css/StyleSheet.css" rel="stylesheet"/>
+    <link href="../Camera/css/StyleSheet.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -104,8 +104,6 @@
         </div>
     </div>
     <!-- Topbar End -->
-
-
     <!-- Navbar Start -->
     <div class="container-fluid bg-dark mb-30">
         <div class="row px-xl-5">
@@ -176,8 +174,6 @@
         </div>
     </div>
     <!-- Navbar End -->
-
-
     <!-- Breadcrumb Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
@@ -191,8 +187,6 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
-
-
     <!-- Cart Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
@@ -205,17 +199,16 @@
                             <th>Tên sản phẩm</th>
                             <th>Giá</th>
                             <th>Số lượng</th>
-                            <th>Tổng</th>
+                            <th>Tổng tiền</th>
                         </tr>
                     </thead>
                     <tbody class="align-middle" id="showCart">
                         @RenderBody()
                     </tbody>
-                    
+
                 </table>
                 <button class="btn btn-success" style="float:right" onclick="btnContinue()">Tiếp tục mua hàng</button>
                 <button class="btn btn-danger" style="float:right" onclick="btnDeleteAll()">Xóa giỏ hàng</button>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#success_tic">Open Modal</button>
             </div>
             <div class="col-lg-4">
                 <form class="mb-30" action="">
@@ -324,7 +317,6 @@
     <!-- Modal -->
     <div id="success_tic" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <a class="close" href="#" data-dismiss="modal">&times;</a>
@@ -337,8 +329,47 @@
                         <div class="checkmark-circle">
                             <div class="background"></div>
                             <div class="checkmark draw"></div>
-                        </div><h1>
+                        </div>
+                        <h1>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="bg-light p-30 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Your name</label>
+                            <input class="form-control" type="text" placeholder="Hiep Tran" id="yourName">;
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Birthday</label>
+                            <input class="form-control" type="date" placeholder="07/10/2002" id="birthDay">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Phone number</label>
+                            <input class="form-control" type="text" placeholder="09123456789" id="phone">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address</label>
+                            <input class="form-control" type="text" placeholder="123 Street" id="address">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Note</label>
+                            <input class="form-control" type="text" placeholder="sang xin min" id="note">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Payment Methods</label>
+                            <select class="custom-select">  
+                                <option selected value="0">Ship code</option>
+                                <option value="1">Banking</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-info btn-lg" onclick="confirmCheckout()">Checkout</button>
+                    </div>
                 </div>
             </div>
         </div>
